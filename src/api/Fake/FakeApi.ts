@@ -1,5 +1,6 @@
 import {IProductsApi, Product, ProductId} from "../ProductApi";
 import {IndexedDictionary} from "../../utils/Dictionary";
+import {uuidv4} from "../../utils/Uuid";
 
 const defaults = { quantity: 0, quantityUnit: 'szt', description: ''};
 
@@ -24,6 +25,7 @@ export default class FakeApi implements IProductsApi {
     }
 
     async addProduct(newProduct: Product): Promise<ProductId> {
+        newProduct.id = uuidv4();
         products = products.Set(newProduct);
         return Promise.resolve(newProduct.id);
     }

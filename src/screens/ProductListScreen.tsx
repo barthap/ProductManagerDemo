@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from "react";
-import {Text, StyleSheet} from "react-native";
+import {StyleSheet, View, Text} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {ProductList} from "../components/ProductListComponents";
 import {Product} from "../api/ProductApi";
@@ -14,10 +14,15 @@ type Props = {
     navigation: ProductListStackNavProp;
 }
 
+function NoItemsMessage() {
+    return <View style={styles.messageContainer}>
+        <Text style={styles.messageText} >Product list is empty, add one</Text>
+    </View>;
+}
 export function ProductListScreen(props: Props) {
 
     //custom hook that loads product list
-    const data = useProducts(true);
+    const [data, reload] = useProducts(true);
 
     const handleItemClick = (product: Product) => {
         props.navigation.navigate(Nav.Details, {
@@ -25,9 +30,15 @@ export function ProductListScreen(props: Props) {
         });
     };
 
+    const noProducts = data.products.length === 0 && !data.isFetching;
+
     return <Container style={styles.container}>
-        {data.isFetching && <Text>Loading...</Text>}
-        <ProductList items={data.products} onItemClick={handleItemClick}/>
+        {noProducts ? <NoItemsMessage/> :
+            <ProductList items={data.products}
+                     onItemClick={handleItemClick}
+                     onRefresh={reload} refreshing={data.isFetching}
+            />
+        }
         <MessageBox/>
     </Container>;
 }
@@ -36,5 +47,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 10
+    },
+    messageContainer: {
+        flex: 1,
+        justifyContent: 'center', alignItems: 'center'
+    },
+    messageText: {
+        fontSize: 15
     }
 });

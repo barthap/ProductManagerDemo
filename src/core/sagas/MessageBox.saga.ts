@@ -1,7 +1,7 @@
 import {messageBoxConstants} from "../constants/MessageBox.constants";
 import {messageBoxActions, MessageBoxShowAction} from "../actions/MessageBox.actions";
 import {put, takeEvery} from "redux-saga/effects";
-import {delay} from "../../utils/delay";
+import {delay} from "../../utils/Delay";
 
 
 //This saga watches for alerts with duration and automatically dismisses them

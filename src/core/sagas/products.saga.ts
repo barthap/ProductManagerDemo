@@ -21,6 +21,7 @@ const watchLoadProducts = function* () {
         try {
             const result = yield Api.getProductList().catch(e=>{throw e});
             yield put(productsActions.loadProductsSuccess(result));
+            yield put(messageBoxActions.show('Products loaded successfully', 'info', false, 2000));
         } catch (e) {
             console.warn('Error when loading products', e);
             yield put(messageBoxActions.show('Loading products failed', 'error'));

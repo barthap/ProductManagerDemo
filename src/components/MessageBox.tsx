@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from "react-native";
 import {Icon} from "native-base";
 import {useDispatch } from "react-redux";
 import {IMessageBoxState} from "../core/reducers/MessageBoxReducer";
-import {typedUseSelector} from "../utils/typedUseSelector";
+import {typedUseSelector} from "../hooks/typedUseSelector";
 import {messageBoxActions} from "../core/actions/MessageBox.actions";
 
 interface MessageBoxComponentProps {

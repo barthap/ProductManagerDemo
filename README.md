@@ -88,3 +88,4 @@ when using Expo Client.
 
 ## Not yet implemented
 * Unit tests
+> As there are no tests, some features might not work as expected!
