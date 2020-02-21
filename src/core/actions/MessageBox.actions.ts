@@ -19,7 +19,7 @@ const show = (message: string,
               dismissible: boolean = true,
               duration: number = null): MessageBoxShowAction => ({
     type: messageBoxConstants.SHOW,
-    payload: {message, dismissible, duration, visible: true, alertStyle: style}
+    payload: {message, dismissible, duration, alertStyle: style}
 });
 const dismiss: ActionCreator<MessageBoxDismissAction> = () => ({ type: messageBoxConstants.DISMISS });
 

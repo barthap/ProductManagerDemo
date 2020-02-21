@@ -19,7 +19,7 @@ const initialState: IMessageBoxState = {
 const messageBoxReducer: Reducer<IMessageBoxState> = (state= initialState, action) => {
     switch (action.type) {
         case messageBoxConstants.SHOW:
-            return {...state, ...action.payload };
+            return {...state, visible: true, ...action.payload };
         case messageBoxConstants.DISMISS:
             return {...state, visible: false };
         default:
