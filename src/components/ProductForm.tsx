@@ -23,7 +23,7 @@ export function ProductForm(props: ProductFormProps) {
         if(name == null || name.length == 0) {
             console.log('empty name');
             setNameErr(true);
-            setErrText('Name cannot be empty');
+            setErrText('Name cannot be empty!');
             return;
         }
         const id = initialData.id || null;

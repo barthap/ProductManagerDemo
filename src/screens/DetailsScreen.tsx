@@ -23,15 +23,15 @@ export function DetailsScreen(props: Props) {
     const handleDeleteBtnClick = () => {
         Alert.alert(
             'Confirm',
-            'Definitywnie chcesz wywalić ' + product.name + '?',
+            'Do you really want to delete ' + product.name + '?',
             [
                 {
-                    text: 'Nie',
+                    text: 'No',
                     onPress: () => console.log('Cancelled deletion'),
                     style: "cancel"
                 },
                 {
-                    text: 'Tak',
+                    text: 'Yes',
                     onPress: () => {
                         dispatch(productsActions.deleteProduct(product.id));
                         props.navigation.goBack();
@@ -64,9 +64,9 @@ export function DetailsScreen(props: Props) {
     return (
         <Container>
             <Content style={styles.text}>
-                <H1 style={styles.text}>Sczegóły produktu: {product.name}</H1>
-                <H2 style={styles.text}>Ilosc: {quantityInfo}</H2>
-                <Text style={styles.text}>Opis: {product.description || 'Brak opisu'}</Text>
+                <H1 style={styles.text}>Product details: {product.name}</H1>
+                <H2 style={styles.text}>Quantity: {quantityInfo}</H2>
+                <Text style={styles.text}>Description: {product.description || 'N/A'}</Text>
             </Content>
             <MessageBox/>
         </Container>
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         width: 100
     }
-})
+});

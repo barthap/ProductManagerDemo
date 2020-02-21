@@ -4,12 +4,13 @@ import {uuidv4} from "../../utils/Uuid";
 
 const defaults = { quantity: 0, quantityUnit: 'szt', description: ''};
 
+//some example data
 let products = new IndexedDictionary<Product>('id', [
-    { id: '1', name: "Chleb", ...defaults},
-    { id: '2', name: "Masło", ...defaults},
-    { id: '3', name: "Szynka", ...defaults},
-    { id: '4', name: "Jajka", ...defaults},
-    { id: '5', name: "Mleko", ...defaults}
+    { id: '1', name: "Bread", ...defaults},
+    { id: '2', name: "Butter", ...defaults},
+    { id: '3', name: "Meat", quantity: 1, quantityUnit: 'kg', description: 'Beef or pork'},
+    { ...defaults, id: '4', name: "Eggs", quantity: 8 },
+    { id: '5', name: "Milk", quantity: 2, quantityUnit: 'L', description: '3.5% fat'}
 ]);
 
 export default class FakeApi implements IProductsApi {

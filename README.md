@@ -16,13 +16,14 @@ and Firebase integration.
 * React Native CLI
 * (optional) Expo CLI
 * Created Firebase project with Firestore database
+_(unless you use built-in fake API)_
 * (Recommended) Yarn
 
 ## Installation
 1. Clone Repo
 2. `yarn install`
 3. Mac/iOS only: `cd ios && pod install && cd ..`
-4. Download Google Services config files
+4. To use Firestore database, download Google Services config files
    - Put `google-services.json` in `./android/app`.
    See docs [here](https://invertase.io/oss/react-native-firebase/quick-start/android-firebase-credentials) 
    for Android
@@ -30,7 +31,7 @@ and Firebase integration.
    See docs [here](https://invertase.io/oss/react-native-firebase/quick-start/ios-firebase-credentials)
    for iOS
    - **Expo users**: Fill in `firebase_credentials.json` with your
-   Firebase project data
+   Firebase project data. Steps above are not needed.
 
 ## Running
 `package.json` contains a few run scripts:
@@ -39,7 +40,16 @@ and Firebase integration.
 * `ios` - Builds iOS project and runs it (Requires Xcode)
 * `expo` - Runs expo daemon - possible to open app in Expo Client
 
-## Stack
+#### Switching API
+By default, an in-memory Fake API is selected. To enable Firestore,
+open `src/api/index.ts` and then
+```typescript
+const Api = new FakeApi();
+//const Api = new FirestoreProductsApi();
+```
+comment out the first line, and uncomment the second one.
+
+## Used libraries and frameworks
 * React Native
 * Expo - uses bare workflow
 * React Navigation 
@@ -86,6 +96,8 @@ when using Expo Client.
 * `src/screens` - Navigation Screen component definitions
 * `src/utils` - Common utility code
 
-## Not yet implemented
+## TODO / Not yet implemented
+* ~~Information message boxes is spamming too much about state~~
+but I think it's OK for demo purposes
 * Unit tests
 > As there are no tests, some features might not work as expected!

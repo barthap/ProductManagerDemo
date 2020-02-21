@@ -3,6 +3,7 @@ import {typedUseSelector} from "./typedUseSelector";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {productsActions} from "../core/actions/products.actions";
+import {messageBoxActions} from "../core/actions/MessageBox.actions";
 
 //example custom hook.
 //for real it is too simple to make it custom, but
@@ -13,7 +14,10 @@ export function useProducts(reload: boolean = true): [IProductsState, () => void
     const dispatchReload = () => dispatch(productsActions.loadProducts());
 
     useEffect(() => {
-        if(reload) dispatchReload();
+        if(reload) {
+            dispatchReload();
+            dispatch(messageBoxActions.show('Loading...', 'info', false));
+        }
 
     }, []);
 

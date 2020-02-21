@@ -21,7 +21,7 @@ const watchLoadProducts = function* () {
         try {
             const result = yield Api.getProductList().catch(e=>{throw e});
             yield put(productsActions.loadProductsSuccess(result));
-            yield put(messageBoxActions.show('Products loaded successfully', 'info', false, 2000));
+            yield put(messageBoxActions.show('Products loaded successfully', 'success', false, 2000));
         } catch (e) {
             console.warn('Error when loading products', e);
             yield put(messageBoxActions.show('Loading products failed', 'error'));
@@ -36,7 +36,7 @@ const watchAddProduct = function* () {
         try {
             yield Api.addProduct(action.payload).catch(e=>{throw e});
             yield put(productsActions.productCrudSuccess());
-            yield put(messageBoxActions.show('Dodano ' + action.payload.name,
+            yield put(messageBoxActions.show('Added ' + action.payload.name,
                 'success', true, 3000));
 
             if(!Api.supportsEvents) //we need to do reload manually
@@ -57,7 +57,7 @@ const watchUpdateProduct = function* () {
         try {
             yield Api.updateProduct(action.payload).catch(e=>{throw e});
             console.log('Updated product ', action.payload);
-            yield put(messageBoxActions.show('Zaktualizowano pomyślnie: ' + action.payload.name,
+            yield put(messageBoxActions.show('Successfully updated ' + action.payload.name,
                 'success', true, 3000));
 
             if(!Api.supportsEvents) //we need to do reload manually
@@ -76,7 +76,7 @@ const watchDeleteProduct = function* () {
         try {
             yield Api.removeProduct(action.payload).catch(e=>{throw e});
             console.log('Deleted product ', action.payload);
-            yield put(messageBoxActions.show('Usunięto pomyślnie', 'info', true, 3000));
+            yield put(messageBoxActions.show('Deleted successfully', 'info', true, 3000));
 
             if(!Api.supportsEvents) //we need to do reload manually
                 yield put(productsActions.loadProducts());  //should it go this way?
