@@ -85,3 +85,6 @@ when using Expo Client.
 * `src/navigation` - React-navigation route and screen configuration
 * `src/screens` - Navigation Screen component definitions
 * `src/utils` - Common utility code
+
+## Not yet implemented
+* Unit tests

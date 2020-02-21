@@ -1,0 +1,35 @@
+
+export const productConstants = {
+    //Fetch action & status
+    LOAD_PRODUCTS: 'LOAD_PRODUCTS',
+    LOAD_PRODUCTS_PENDING: 'LOAD_PRODUCTS_PENDING',
+    LOAD_PRODUCTS_SUCCESS: 'LOAD_PRODUCTS_SUCCESS',
+    LOAD_PRODUCTS_FAILURE: 'LOAD_PRODUCTS_FAILURE',
+
+    //Create, Update, Delete status
+    PRODUCTS_CRUD_PENDING: 'PRODUCTS_CRUD_PENDING',
+    PRODUCTS_CRUD_SUCCESS: 'PRODUCTS_CRUD_SUCCESS',
+    PRODUCTS_CRUD_FAILURE: 'PRODUCTS_CRUD_FAILURE',
+
+    //Operations
+    ADD_PRODUCT: 'ADD_PRODUCT',
+    UPDATE_PRODUCT: 'UPDATE_PRODUCT',
+    DELETE_PRODUCT: 'DELETE_PRODUCT'
+};
+
+export type LOAD_PRODUCTS         = typeof productConstants.LOAD_PRODUCTS;
+export type LOAD_PRODUCTS_PENDING = typeof productConstants.LOAD_PRODUCTS_PENDING;
+export type LOAD_PRODUCTS_SUCCESS = typeof productConstants.LOAD_PRODUCTS_SUCCESS;
+export type LOAD_PRODUCTS_FAILURE = typeof productConstants.LOAD_PRODUCTS_FAILURE;
+
+export type LOAD_PRODUCTS_STATUS = LOAD_PRODUCTS_PENDING | LOAD_PRODUCTS_SUCCESS | LOAD_PRODUCTS_FAILURE;
+
+export type ADD_PRODUCT         = typeof productConstants.ADD_PRODUCT;
+export type PRODUCTS_CRUD_PENDING = typeof productConstants.PRODUCTS_CRUD_PENDING;
+export type PRODUCTS_CRUD_SUCCESS = typeof productConstants.PRODUCTS_CRUD_SUCCESS;
+export type PRODUCTS_CRUD_FAILURE = typeof productConstants.PRODUCTS_CRUD_FAILURE;
+
+export type PRODUCT_CRUD_STATUS = PRODUCTS_CRUD_PENDING | PRODUCTS_CRUD_SUCCESS | PRODUCTS_CRUD_FAILURE;
+
+export type UPDATE_PRODUCT      = typeof productConstants.UPDATE_PRODUCT;
+export type DELETE_PRODUCT      = typeof productConstants.DELETE_PRODUCT;
