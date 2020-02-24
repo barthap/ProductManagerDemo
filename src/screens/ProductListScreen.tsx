@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, {useEffect} from "react";
 import {StyleSheet, View, Text} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {ProductList} from "../components/ProductListComponents";
+import {ProductList} from "../components/ProductList";
 import {Product} from "../api/ProductApi";
 import {useProducts} from "../hooks/useProducts";
 import {Container} from 'native-base';
