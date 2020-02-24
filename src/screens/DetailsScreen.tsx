@@ -2,11 +2,15 @@ import React from "react";
 import {View, Text, Button, StyleSheet, Alert} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
-import {Container, Content, H1, H2, Icon} from "native-base";
+import {Container, Content, H1, H3, Icon} from "native-base";
 import {useDispatch} from "react-redux";
 import {productsActions} from "../core/actions/products.actions";
 import {MessageBox} from "../components/MessageBox";
 import {Nav, RootStackParamList} from "../navigation/routeNames";
+import i18n from '../i18n';
+import analytics from '@react-native-firebase/analytics';
+import {Constants} from "react-native-unimodules";
+import {AppOwnership} from "expo-constants";
 
 type DetailsStackNavProp = StackNavigationProp<RootStackParamList, typeof Nav.Details>;
 type DetailsScreenRouteProp = RouteProp<RootStackParamList, typeof Nav.Details>;
@@ -22,18 +26,20 @@ export function DetailsScreen(props: Props) {
     const dispatch = useDispatch();
     const handleDeleteBtnClick = () => {
         Alert.alert(
-            'Confirm',
-            'Do you really want to delete ' + product.name + '?',
+            i18n.t('modals.deletion.title'),
+            i18n.t('modals.deletion.message', {name : product.name}),
             [
                 {
-                    text: 'No',
+                    text: i18n.t('modals.deletion.btn_no'),
                     onPress: () => console.log('Cancelled deletion'),
                     style: "cancel"
                 },
                 {
-                    text: 'Yes',
+                    text: i18n.t('modals.deletion.btn_yes'),
                     onPress: () => {
                         dispatch(productsActions.deleteProduct(product.id));
+                        if(Constants.appOwnership !== AppOwnership.Expo)
+                            analytics().logEvent('product_delete', {product_id: product.id, product_name: product.name});
                         props.navigation.goBack();
                     },
                     style: "destructive"
@@ -64,9 +70,9 @@ export function DetailsScreen(props: Props) {
     return (
         <Container>
             <Content style={styles.text}>
-                <H1 style={styles.text}>Product details: {product.name}</H1>
-                <H2 style={styles.text}>Quantity: {quantityInfo}</H2>
-                <Text style={styles.text}>Description: {product.description || 'N/A'}</Text>
+                <H1 style={styles.text}>{i18n.t('details.header', {name: product.name}) }</H1>
+                <H3 style={styles.text}>{i18n.t('details.quantity')} {quantityInfo}</H3>
+                <Text style={styles.text}>{i18n.t('details.description')} {product.description || 'N/A'}</Text>
             </Content>
             <MessageBox/>
         </Container>

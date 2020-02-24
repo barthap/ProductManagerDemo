@@ -1,0 +1,62 @@
+{
+  "title": {
+    "add": "Add Product",
+    "edit": "Edit %{name}",
+    "list": "Product List",
+    "about": "About app"
+  },
+  "menu": {
+    "products": "Products",
+    "about": "About"
+  },
+  "form": {
+    "fields": {
+      "name": "Name",
+      "quantity": "Quantity",
+      "description": "Description",
+      "unit": "Unit"
+    },
+    "messages": {
+      "name_empty": "Name cannot be empty!"
+    },
+    "units": {
+      "pieces": "pieces",
+      "litres": "Litres",
+      "kilograms": "Kilograms"
+    },
+    "save": "Save"
+  },
+  "details": {
+    "header": "Product details: %{name}",
+    "quantity": "Quantity:",
+    "description": "Description:"
+  },
+  "modals": {
+    "deletion": {
+      "title": "Confirm",
+      "message": "Do you really want to delete %{name}?",
+      "btn_yes": "Yes",
+      "btn_no": "No"
+    }
+  },
+  "about": {
+    "text": "Product Manager Demo. This app is just another CRUD demo.",
+    "github": "SeeGitHub page",
+    "btn_text": "Tap me",
+    "example_msg": "This is just a simple message box used for testing purposes"
+  },
+  "list": {
+    "empty": "Product list is empty. Add one!"
+  },
+  "alerts": {
+    "loading": "Loading...",
+    "load_success": "Products loaded successfully",
+    "load_fail": "Loading products failed",
+    "add_success": "Added %{name}!",
+    "add_fail": "Adding product failed",
+    "update_success": "Successfully updated %{name}",
+    "update_fail": "Updating product failed",
+    "delete_success": "Deleted successfully",
+    "delete fail": "Deleting product failed"
+  }
+}

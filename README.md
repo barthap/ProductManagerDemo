@@ -3,9 +3,9 @@ Yet another React Native CRUD app, written in
 TypeScript for demo purposes. Features:
 - View product list
 - View product details
-- Add new product
-- Edit products
-- Delete products
+- Add, edit and delete products
+- Language/i18n support
+- Google (Firebase) Analytics integration
 
 See also [Technical Features](#technical-features)
 
@@ -57,8 +57,9 @@ comment out the first line, and uncomment the second one.
 * Redux
 * Redux Saga
 * Firestore database
-* React Native Firebase - for native builds
+* React Native Firebase (Firestore, Analytics) - for native builds 
 * Firebase JS SDK - for Expo client
+* i18n-js for language support
 
 ## Technical features
 * Two implementations of data management API: Firebase Firestore
@@ -66,11 +67,15 @@ and simple in-memory dictionary based API for demo purposes. Interfaces
 needed to create custom implementation are provided.
 * Support for event-driven APIs (for example Firestore `onSnapshot()`)
 * Expo Client doesn't support native modules, React-Native-Firebase
-cannot be used. [See details](https://docs.expo.io/versions/v36.0.0/guides/using-firebase/).
+cannot be used there. [See details](https://docs.expo.io/versions/v36.0.0/guides/using-firebase/).
 App provides auto fallback Firebase JS SDK and loads it instead of RNFirebase
 when using Expo Client.
-> Note: React-Native-Firebase and Firebase JS SDK provide identical API,
-> so there's no need to split implementatnion
+> Note: React-Native-Firebase and Firestore JS SDK provide identical API,
+> so there's no need to split database implementation.
+
+> Only Firestore module is supported on Expo, because it's necessary
+> for app to work.
+>Analytics and other Firebase modules are working only on native builds
 
 ## File structure
 * `index.js` - React Native main file
@@ -92,6 +97,7 @@ when using Expo Client.
   - `sagas` - Side effects for actions.
     - `products.saga.ts` - Connects Redux actions and store with API
 * `src/hooks` - custom React hooks
+* `src/i18n` - Internalization / language support files
 * `src/navigation` - React-navigation route and screen configuration
 * `src/screens` - Navigation Screen component definitions
 * `src/utils` - Common utility code

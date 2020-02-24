@@ -4,6 +4,7 @@ import {MessageBox} from "../components/MessageBox";
 import {useDispatch} from "react-redux";
 import {messageBoxActions} from "../core/actions/MessageBox.actions";
 import * as WebBrowser from 'expo-web-browser';
+import i18n from "../i18n";
 
 function openGitHubPage() {
     WebBrowser.openBrowserAsync('https://github.com/barthap/ProductManagerDemo');
@@ -16,20 +17,19 @@ export function AboutScreen() {
             <Header>
                 <Left/>
                 <Body>
-                    <Title>About app</Title>
+                    <Title>{i18n.t('title.about')}</Title>
                 </Body>
                 <Right />
             </Header>
             <Content contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>Product Manager Demo. This app is just another CRUD demo.</Text>
+                <Text>{i18n.t('about.text')}</Text>
                 <Text style={{color: '#4d90cc', padding: 20}}
-                      onPress={openGitHubPage}>See GitHub page</Text>
+                      onPress={openGitHubPage}>{i18n.t('about.github')}</Text>
                 <Button primary onPress={() => {
-                    dispatch(messageBoxActions.show('This is just a simple message box used for ' +
-                        'testing purposes',
+                    dispatch(messageBoxActions.show(i18n.t('about.example_msg'),
                         'info',
                         true, 0))
-                }}><Text>Tap me</Text></Button>
+                }}><Text>{i18n.t('about.btn_text')}</Text></Button>
             </Content>
             <MessageBox/>
         </Container>
