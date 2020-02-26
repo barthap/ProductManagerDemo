@@ -8,7 +8,7 @@ import {
     ProductEventManager as eventManager
 } from "../../api";
 import {ProductCollectionListener} from "../../api/Firestore/ProductApi";
-import FakeApi from "../../api/Fake/FakeApi";
+import i18n from "../../i18n";
 
 //Event-based api automatically loads data, so most of the time this is not needed
 //See startApiEventListener() saga
@@ -21,10 +21,10 @@ const watchLoadProducts = function* () {
         try {
             const result = yield Api.getProductList().catch(e=>{throw e});
             yield put(productsActions.loadProductsSuccess(result));
-            yield put(messageBoxActions.show('Products loaded successfully', 'success', false, 2000));
+            yield put(messageBoxActions.show(i18n.t('alerts.load_success'), 'success', false, 2000));
         } catch (e) {
             console.warn('Error when loading products', e);
-            yield put(messageBoxActions.show('Loading products failed', 'error'));
+            yield put(messageBoxActions.show(i18n.t('alerts.load_fail'), 'error'));
             yield put(productsActions.loadProductsFailure());
         }
     });
@@ -36,7 +36,7 @@ const watchAddProduct = function* () {
         try {
             yield Api.addProduct(action.payload).catch(e=>{throw e});
             yield put(productsActions.productCrudSuccess());
-            yield put(messageBoxActions.show('Added ' + action.payload.name,
+            yield put(messageBoxActions.show(i18n.t('alerts.add_success', {name: action.payload.name}),
                 'success', true, 3000));
 
             if(!Api.supportsEvents) //we need to do reload manually
@@ -46,7 +46,7 @@ const watchAddProduct = function* () {
 
         } catch (e) {
             console.warn('Error when adding product', e);
-            yield put(messageBoxActions.show('Adding product failed', 'error'));
+            yield put(messageBoxActions.show(i18n.t('alerts.add_fail'), 'error'));
             yield put(productsActions.productCrudFailure());
         }
     })
@@ -57,7 +57,7 @@ const watchUpdateProduct = function* () {
         try {
             yield Api.updateProduct(action.payload).catch(e=>{throw e});
             console.log('Updated product ', action.payload);
-            yield put(messageBoxActions.show('Successfully updated ' + action.payload.name,
+            yield put(messageBoxActions.show(i18n.t('alerts.update_success', {name: action.payload.name}),
                 'success', true, 3000));
 
             if(!Api.supportsEvents) //we need to do reload manually
@@ -66,7 +66,7 @@ const watchUpdateProduct = function* () {
             //instead of calling api again, but this solution is simpler and closer to event-based one
         } catch (e) {
             console.warn('Error when updating product', e);
-            yield put(messageBoxActions.show('Updating product failed', 'error'));
+            yield put(messageBoxActions.show(i18n.t('alerts.update_fail'), 'error'));
         }
     })
 };
@@ -76,7 +76,7 @@ const watchDeleteProduct = function* () {
         try {
             yield Api.removeProduct(action.payload).catch(e=>{throw e});
             console.log('Deleted product ', action.payload);
-            yield put(messageBoxActions.show('Deleted successfully', 'info', true, 3000));
+            yield put(messageBoxActions.show(i18n.t('alerts.delete_success'), 'info', true, 3000));
 
             if(!Api.supportsEvents) //we need to do reload manually
                 yield put(productsActions.loadProducts());  //should it go this way?
@@ -84,7 +84,7 @@ const watchDeleteProduct = function* () {
             //instead of calling api again, but this solution is simpler and closer to event-based one
         } catch (e) {
             console.warn('Error when deleting product', e);
-            yield put(messageBoxActions.show('Deleting product failed', 'error'));
+            yield put(messageBoxActions.show(i18n.t('alerts.delete_fail'), 'error'));
         }
     })
 };

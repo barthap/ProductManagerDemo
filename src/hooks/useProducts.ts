@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 import {productsActions} from "../core/actions/products.actions";
 import {messageBoxActions} from "../core/actions/MessageBox.actions";
+import i18n from "../i18n";
 
 //example custom hook.
 //for real it is too simple to make it custom, but
@@ -16,7 +17,7 @@ export function useProducts(reload: boolean = true): [IProductsState, () => void
     useEffect(() => {
         if(reload) {
             dispatchReload();
-            dispatch(messageBoxActions.show('Loading...', 'info', false));
+            dispatch(messageBoxActions.show(i18n.t('alerts.loading'), 'info', false));
         }
 
     }, []);

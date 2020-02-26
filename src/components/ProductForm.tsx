@@ -2,6 +2,7 @@ import {Product} from "../api/ProductApi";
 import React, {useState} from "react";
 import {Form, Item, Label, Input, Button, Text, Textarea, Picker, Icon} from 'native-base';
 import {View} from "react-native";
+import i18n from "../i18n";
 
 export interface ProductFormProps {
     initialData?: Product;
@@ -23,7 +24,7 @@ export function ProductForm(props: ProductFormProps) {
         if(name == null || name.length == 0) {
             console.log('empty name');
             setNameErr(true);
-            setErrText('Name cannot be empty!');
+            setErrText(i18n.t('form.messages.name_empty'));
             return;
         }
         const id = initialData.id || null;
@@ -35,7 +36,7 @@ export function ProductForm(props: ProductFormProps) {
         <Text style={{color: '#f00'}}>{errText}</Text>
         <Form style={{paddingBottom: 20}}>
             <Item error={nameErr} stackedLabel>
-                <Label>Name</Label>
+                <Label>{i18n.t('form.fields.name')}</Label>
                 <Input value={name} onChangeText={val => {
                     setName(val);
                     if(val.length > 0) {    //reset error when typing
@@ -46,7 +47,7 @@ export function ProductForm(props: ProductFormProps) {
             </Item>
             <View style={{ flexDirection: 'row', flex: 1, alignItems: 'stretch'}}>
                 <Item stackedLabel style={{flex: 1}}>
-                    <Label>Quantity</Label>
+                    <Label>{i18n.t('form.fields.quantity')}</Label>
                     <Input keyboardType="numeric" value={quantity.toString()} onChangeText={val => {
                         const num = parseInt(val);
                         setQuantity(isNaN(num) ? 0 : num);
@@ -57,23 +58,23 @@ export function ProductForm(props: ProductFormProps) {
                         mode="dropdown"
                         iosIcon={<Icon name="arrow-down" />}
                         style={{ width: undefined }}
-                        placeholder="Unit"
+                        placeholder={i18n.t('form.fields.unit')}
                         placeholderStyle={{ color: "#bfc6ea" }}
                         placeholderIconColor="#007aff"
                         selectedValue={quantityUnit}
                         onValueChange={setQuantityUnit}
                     >
-                        <Picker.Item label="Szt." value="szt" />
-                        <Picker.Item label="Litry" value="L" />
-                        <Picker.Item label="Kilogramy" value="kg" />
+                        <Picker.Item label={i18n.t('form.units.pieces')} value="szt" />
+                        <Picker.Item label={i18n.t('form.units.litres')} value="L" />
+                        <Picker.Item label={i18n.t('form.units.kilograms')} value="kg" />
                     </Picker>
                 </Item>
             </View>
             <Textarea rowSpan={5} bordered underline={true}
-                      placeholder="Description"
+                      placeholder={i18n.t('form.fields.description')}
                       value={description}
                       onChangeText={t => setDescription(t)}/>
         </Form>
-        <Button primary onPress={handleSubmit}><Text>Save</Text></Button>
+        <Button primary onPress={handleSubmit}><Text>{i18n.t('form.save')}</Text></Button>
     </React.Fragment>);
 }

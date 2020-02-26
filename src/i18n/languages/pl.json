@@ -1,0 +1,62 @@
+{
+  "title": {
+    "add": "Dodaj produkt",
+    "edit": "Edytuj %{name}",
+    "list": "Lista produktów",
+    "about": "O programie"
+  },
+  "menu": {
+    "products": "Produkty",
+    "about": "Informacje"
+  },
+  "form": {
+    "fields": {
+      "name": "Nazwa",
+      "quantity": "Ilość",
+      "description": "Opis",
+      "unit": "Jednostka"
+    },
+    "messages": {
+      "name_empty": "Nazwa nie może być pusta!"
+    },
+    "units": {
+      "pieces": "sztuk",
+      "litres": "litrów",
+      "kilograms": "kilogramów"
+    },
+    "save": "Zapisz"
+  },
+  "details": {
+    "header": "Szczegóły produktu: %{name}",
+    "quantity": "Ilość:",
+    "description": "Opis:"
+  },
+  "modals": {
+    "deletion": {
+      "title": "Potwierdź usunięcie",
+      "message": "Czy na pewno chcesz usunąć %{name}?",
+      "btn_yes": "Tak",
+      "btn_no": "Nie"
+    }
+  },
+  "about": {
+    "text": "Product Manager Demo. Przykładowy CRUD w React Native",
+    "github": "Zobacz na GitHubie",
+    "btn_text": "Kliknij mnie",
+    "example_msg": "To przykładowa wiadomość używana do testów"
+  },
+  "list": {
+    "empty": "Lista produktów jest pusta. Dodaj jakiś!"
+  },
+  "alerts": {
+    "loading": "Wczytywanie...",
+    "load_success": "Produkty wczytano pomyślnie",
+    "load_fail": "Nie udało się wczytać produktów",
+    "add_success": "Dodano %{name}!",
+    "add_fail": "Nie udało się dodać produktu",
+    "update_success": "Pomyślnie zaktualizowano %{name}",
+    "update_fail": "Nie udało się zaktualizować produktu",
+    "delete_success": "Usunięto pomyślnie",
+    "delete fail": "Nie udało się usunąć produktu"
+  }
+}
