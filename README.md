@@ -101,9 +101,10 @@ when using Expo Client.
 * `src/navigation` - React-navigation route and screen configuration
 * `src/screens` - Navigation Screen component definitions
 * `src/utils` - Common utility code
+* `__tests__` - Unit tests for project
 
 ## TODO / Not yet implemented
 * ~~Information message boxes is spamming too much about state~~
 but I think it's OK for demo purposes
 * Unit tests
-> As there are no tests, some features might not work as expected!
+> As there are only few tests, some features might not work as expected!
