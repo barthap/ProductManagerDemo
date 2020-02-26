@@ -8,11 +8,11 @@ const defaults = { quantity: 0, quantityUnit: 'szt', description: ''};
 
 //some example data
 let products = new IndexedDictionary<Product>('id', [
-    { id: '1', name: "Bread", ...defaults},
-    { id: '2', name: "Butter", ...defaults},
-    { id: '3', name: "Meat", quantity: 1, quantityUnit: 'kg', description: 'Beef or pork'},
+    { ...defaults, id: '1', name: "Bread" },
+    { ...defaults, id: '2', name: "Butter" },
+    { ...defaults, id: '3', name: "Meat", quantity: 1, quantityUnit: 'kg', description: 'Beef or pork'},
     { ...defaults, id: '4', name: "Eggs", quantity: 8 },
-    { id: '5', name: "Milk", quantity: 2, quantityUnit: 'L', description: '3.5% fat'}
+    { ...defaults, id: '5', name: "Milk", quantity: 2, quantityUnit: 'L', description: '3.5% fat'}
 ]);
 
 /**

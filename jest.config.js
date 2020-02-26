@@ -10,4 +10,7 @@ module.exports = {
         "**/*.test.ts?(x)"
     ],
     cacheDirectory: ".jest/cache",
+    setupFiles: [
+        "./jest.setup.js"
+    ]
 };
