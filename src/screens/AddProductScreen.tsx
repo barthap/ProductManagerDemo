@@ -4,7 +4,7 @@ import { RouteProp } from "@react-navigation/native";
 import {useProducts} from "../hooks/useProducts";
 import {Text, Container, Content} from 'native-base';
 import {useDispatch} from "react-redux";
-import {productsActions} from "../core/actions/products.actions";
+import {productsActions} from "../core/actions/Products.actions";
 import {ProductForm} from "../components/ProductForm";
 import {StyleSheet} from "react-native";
 import {Nav, NavType, RootStackParamList} from "../navigation/routeNames";

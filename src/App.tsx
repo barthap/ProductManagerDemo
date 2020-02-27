@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavigationStack} from "./navigation/navigation";
+import {AppNavigation} from "./navigation/navigation";
 import createSagaMiddleware from 'redux-saga';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -18,7 +18,7 @@ sagaMiddleware.run(rootSaga);
 export default function App() {
     return (
         <Provider store={store}>
-            <NavigationStack/>
+            <AppNavigation/>
         </Provider>
     );
 }

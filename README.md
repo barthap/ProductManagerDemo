@@ -95,7 +95,7 @@ when using Expo Client.
   - `constants` - names and type names for actions
   - `reducers`
   - `sagas` - Side effects for actions.
-    - `products.saga.ts` - Connects Redux actions and store with API
+    - `Products.saga.ts` - Connects Redux actions and store with API
 * `src/hooks` - custom React hooks
 * `src/i18n` - Internalization / language support files
 * `src/navigation` - React-navigation route and screen configuration

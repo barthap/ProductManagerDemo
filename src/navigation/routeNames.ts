@@ -8,12 +8,16 @@ export type NavType = {
     Details: 'Details';
     Edit: 'Edit';
     Add: 'Add';
+    Login: 'Login';
+    Register: 'Register';
 }
 export const Nav: NavType = {
     ProductList: 'ProductList',
     Details: 'Details',
     Edit: 'Edit',
-    Add: 'Add'
+    Add: 'Add',
+    Login: 'Login',
+    Register: 'Register'
 };
 
 export type RootStackParamList = {
@@ -21,4 +25,6 @@ export type RootStackParamList = {
     Details: { product: Product };
     Add: undefined;
     Edit: { product: Product };
+    Login: undefined;
+    Register: undefined;
 };

@@ -5,7 +5,7 @@ import {
     LOAD_PRODUCTS,
     LOAD_PRODUCTS_STATUS,
     productConstants, UPDATE_PRODUCT
-} from "../constants/products.constants";
+} from "../constants/Products.constants";
 import {Product, ProductId} from "../../api/ProductApi";
 
 

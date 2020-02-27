@@ -1,7 +1,7 @@
 import {all, put, takeEvery, take, fork} from "redux-saga/effects";
 import {eventChannel} from "redux-saga";
-import {productConstants} from "../constants/products.constants";
-import {AddProductAction, DeleteProductAction, productsActions, UpdateProductAction} from "../actions/products.actions";
+import {productConstants} from "../constants/Products.constants";
+import {AddProductAction, DeleteProductAction, productsActions, UpdateProductAction} from "../actions/Products.actions";
 import {messageBoxActions} from "../actions/MessageBox.actions";
 import {
     ProductsApi as Api,

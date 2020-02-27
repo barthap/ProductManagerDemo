@@ -4,7 +4,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import {Container, Content, H1, H3, Icon} from "native-base";
 import {useDispatch} from "react-redux";
-import {productsActions} from "../core/actions/products.actions";
+import {productsActions} from "../core/actions/Products.actions";
 import {MessageBox} from "../components/MessageBox";
 import {Nav, RootStackParamList} from "../navigation/routeNames";
 import i18n from '../i18n';

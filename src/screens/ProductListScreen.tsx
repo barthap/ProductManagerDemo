@@ -5,26 +5,29 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {ProductList} from "../components/ProductList";
 import {Product} from "../api/ProductApi";
 import {useProducts} from "../hooks/useProducts";
-import {Container} from 'native-base';
+import {Container, Icon} from 'native-base';
 import {MessageBox} from "../components/MessageBox";
 import {Nav, RootStackParamList} from "../navigation/routeNames";
 import i18n from '../i18n';
 import analytics from "@react-native-firebase/analytics";
 import {Constants} from "react-native-unimodules";
 import {AppOwnership} from "expo-constants";
+import {useComponentLifecycleLog} from "../hooks/useComponentLifecycleLog";
 
 type ProductListStackNavProp = StackNavigationProp<RootStackParamList, typeof Nav.ProductList>;
 type Props = {
     navigation: ProductListStackNavProp;
 }
 
-function NoItemsMessage() {
+function NoItemsMessage(props: {handleRefresh: () => void}) {
     return <View style={styles.messageContainer}>
         <Text style={styles.messageText} >{i18n.t('list.empty')}</Text>
+        <Icon name='ios-refresh' onPress={props.handleRefresh} style={styles.refreshIcon} fontSize={20}/>
+        <Text style={styles.secondaryText}>Click to refresh</Text>
     </View>;
 }
 export function ProductListScreen(props: Props) {
-
+    useComponentLifecycleLog('Product Lists');
     //custom hook that loads product list
     const [data, reload] = useProducts(true);
 
@@ -44,7 +47,7 @@ export function ProductListScreen(props: Props) {
     const noProducts = data.products.length === 0 && !data.isFetching;
 
     return <Container style={styles.container}>
-        {noProducts ? <NoItemsMessage/> :
+        {noProducts ? <NoItemsMessage handleRefresh={reload}/> :
             <ProductList items={data.products}
                      onItemClick={handleItemClick}
                      onRefresh={reload} refreshing={data.isFetching}
@@ -65,5 +68,13 @@ const styles = StyleSheet.create({
     },
     messageText: {
         fontSize: 15
+    },
+    refreshIcon: {
+        paddingTop: 20,
+        fontSize: 50
+    },
+    secondaryText: {
+        fontSize: 12,
+        color: '#555'
     }
 });

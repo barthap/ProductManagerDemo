@@ -3,7 +3,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RouteProp} from "@react-navigation/native";
 import {Container, Content} from 'native-base';
 import {useDispatch} from "react-redux";
-import {productsActions} from "../core/actions/products.actions";
+import {productsActions} from "../core/actions/Products.actions";
 import {ProductForm} from "../components/ProductForm";
 import {StyleSheet} from "react-native";
 import {Nav, RootStackParamList} from "../navigation/routeNames";

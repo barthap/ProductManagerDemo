@@ -2,7 +2,7 @@ import {IProductsState} from "../core/reducers/ProductsReducer";
 import {typedUseSelector} from "./typedUseSelector";
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
-import {productsActions} from "../core/actions/products.actions";
+import {productsActions} from "../core/actions/Products.actions";
 import {messageBoxActions} from "../core/actions/MessageBox.actions";
 import i18n from "../i18n";
 

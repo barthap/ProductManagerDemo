@@ -16,6 +16,10 @@ import {NavigationState} from "@react-navigation/routers";
 import {Constants} from "react-native-unimodules";
 import {AppOwnership} from "expo-constants";
 import i18n from "../i18n";
+import {typedUseSelector} from "../hooks/typedUseSelector";
+import {LoginScreen} from "../screens/LoginScreen";
+import {RegisterScreen} from "../screens/RegisterScreen";
+import {ProfileScreen} from "../screens/ProfileScreen";
 
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -51,7 +55,42 @@ const ProductStackScreen = () => (
     </Stack.Navigator>
 );
 
-export function NavigationStack() {
+function NavigationMain() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Products"
+                        component={ProductStackScreen}
+                        options={{
+                            tabBarIcon: icons.products,
+                            title: i18n.t('menu.products')
+                        }}/>
+            <Tab.Screen name="Profile"
+                        component={ProfileScreen}
+                        options={{
+                            tabBarIcon: icons.profile,
+                            title: i18n.t('menu.profile')
+                        }}/>
+            <Tab.Screen name="About"
+                        component={AboutScreen}
+                        options={{
+                            tabBarIcon: icons.about,
+                            title: i18n.t('menu.about')
+                        }}/>
+        </Tab.Navigator>
+    );
+}
+
+function NavigationAuth() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name={Nav.Login} component={LoginScreen}/>
+            <Stack.Screen name={Nav.Register} component={RegisterScreen}/>
+        </Stack.Navigator>
+    );
+}
+
+
+export function AppNavigation() {
     const routeNameRef = React.useRef();
     const navigationRef = React.useRef();
 
@@ -67,21 +106,10 @@ export function NavigationStack() {
         routeNameRef.current = currentRouteName;
     };
 
+    const authState = typedUseSelector(state => state.auth);
+
     return (<NavigationContainer ref={navigationRef} onStateChange={handleStateChange}>
-        <Tab.Navigator>
-            <Tab.Screen name="Products"
-                        component={ProductStackScreen}
-                        options={{
-                            tabBarIcon: icons.products,
-                            title: i18n.t('menu.products')
-                        }}/>
-            <Tab.Screen name="About"
-                        component={AboutScreen}
-                        options={{
-                            tabBarIcon: icons.about,
-                            title: i18n.t('menu.about')
-                        }}/>
-        </Tab.Navigator>
+        {authState.isLoggedIn ? <NavigationMain/> : <NavigationAuth/>}
     </NavigationContainer>);
 }
 
@@ -100,6 +128,7 @@ function getActiveRouteName(state: NavigationState | Partial<NavigationState>) {
 //icons available: https://expo.github.io/vector-icons/
 const icons = {
     products: IosIcon('ios-cube'),
+    profile: IosIcon('ios-person'),
     about: IosIcon('ios-bulb')
 };
 
