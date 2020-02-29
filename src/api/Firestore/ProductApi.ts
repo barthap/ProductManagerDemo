@@ -2,13 +2,17 @@ import firestore from './firestoreProvider';
 import {IProductsApi, Product, ProductId} from "../ProductApi";
 import {ApiEventListener } from "../EventApi";
 import {FirestoreEventManager, QueryDocSnapshot} from "./EventApi";
+import auth from '@react-native-firebase/auth';
 
 //TODO: Rename to "ProductsApi"
 export class FirestoreProductsApi implements IProductsApi {
     private ref = firestore().collection('products');
 
     async addProduct (newProduct: Product) {
-        const data = {...newProduct};
+        const data = {
+            ...newProduct,
+            userID: auth().currentUser.uid
+        };
         delete data.id; //Firestore will create its own id
         const result = await this.ref.add(data);
         console.log('added', newProduct, 'with id ', result.id);
@@ -16,7 +20,9 @@ export class FirestoreProductsApi implements IProductsApi {
     }
 
     async getProductList(): Promise<Product[]> {
-        const querySnapshot = await this.ref.get();
+        const querySnapshot = await this.ref
+            .where('userID', '==', auth().currentUser.uid)
+            .get();
 
         console.log('Total Products', querySnapshot.size);
 
@@ -39,7 +45,7 @@ export class FirestoreProductsApi implements IProductsApi {
 
         const data = {...product};
         delete data.id;
-        return this.ref.doc(product.id).set(data);
+        return this.ref.doc(product.id).set(data, {merge: true});
     }
 
     readonly supportsEvents = true;  //events are supported

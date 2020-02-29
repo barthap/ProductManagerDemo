@@ -6,6 +6,8 @@ import {Nav, RootStackParamList} from "../navigation/routeNames";
 import {useDispatch} from "react-redux";
 import {useComponentLifecycleLog} from "../hooks/useComponentLifecycleLog";
 import {authActions} from "../core/actions/Auth.actions";
+import {typedUseSelector} from "../hooks/typedUseSelector";
+import {Spinner} from "native-base";
 
 type LoginNavProp = StackNavigationProp<RootStackParamList, typeof Nav.Login>;
 type Props = {
@@ -15,12 +17,16 @@ type Props = {
 export function LoginScreen(props: Props) {
     const [email, setEmail] = useState('a@b.com');
     const [password, setPassword] = useState('zaq1@WSX');
+
     const dispatch = useDispatch();
+    const authState = typedUseSelector(state => state.auth);
 
     useComponentLifecycleLog('Login Screen');
 
     return (
         <View style={styles.container}>
+            {authState.isLoading && <Spinner/>}
+            {authState.isError && <Text style={styles.errorMsg}>{authState.errorMsg}</Text>}
             <TextInput
                 style={styles.inputBox}
                 value={email}
@@ -77,5 +83,9 @@ const styles = StyleSheet.create({
     },
     buttonSignup: {
         fontSize: 12
+    },
+    errorMsg: {
+        color: '#b41600',
+        fontSize: 15
     }
-})
+});

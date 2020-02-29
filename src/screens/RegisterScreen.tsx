@@ -3,10 +3,14 @@ import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-nativ
 import {useComponentLifecycleLog} from "../hooks/useComponentLifecycleLog";
 import {useDispatch} from "react-redux";
 import {authActions} from "../core/actions/Auth.actions";
+import {typedUseSelector} from "../hooks/typedUseSelector";
+import {Spinner} from "native-base";
 
 
 export function RegisterScreen() {
     useComponentLifecycleLog('Register Screen');
+
+    const authState = typedUseSelector(state => state.auth);
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
@@ -14,6 +18,8 @@ export function RegisterScreen() {
     const [password, setPassword] = useState('');
 
     return <View style={styles.container}>
+        {authState.isLoading && <Spinner/>}
+        {authState.isError && <Text style={styles.errorMsg}>{authState.errorMsg}</Text>}
         <TextInput
             style={styles.inputBox}
             value={name}
@@ -74,5 +80,9 @@ const styles = StyleSheet.create({
     },
     buttonSignup: {
         fontSize: 12
+    },
+    errorMsg: {
+        color: '#b41600',
+        fontSize: 15
     }
-})
+});

@@ -3,6 +3,7 @@ import {take, takeEvery, all, put} from "redux-saga/effects";
 import auth from '@react-native-firebase/auth';
 import {authConstants} from "../constants/Auth.constants";
 import {authActions, LoginAction, RegisterAction} from "../actions/Auth.actions";
+import {ProductEventManager} from "../../api";
 
 function* watchLogin() {
     yield takeEvery(authConstants.LOGIN, function*(action: LoginAction) {
@@ -81,7 +82,10 @@ function* authStateListener() {
         if(user == null) {
             yield put(authActions.logoutSuccess());
         } else {
-            yield put(authActions.loginSuccess(user))
+            //API event manager must be restarted
+            //in order to load products for new user
+            ProductEventManager.restart();
+            yield put(authActions.loginSuccess(user));
         }
     }
 }

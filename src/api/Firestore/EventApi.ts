@@ -1,5 +1,6 @@
 import {ApiEventListener, ApiEventManager} from "../EventApi";
 import firestore, {FirebaseFirestoreTypes} from "./firestoreProvider";
+import auth from '@react-native-firebase/auth';
 
 export type QueryDocSnapshot = FirebaseFirestoreTypes.QueryDocumentSnapshot;
 
@@ -19,7 +20,11 @@ export abstract class FirestoreEventManager<T> extends ApiEventManager<T[]> {
 
     private startFirestoreListener() {
         console.log('Starting Firestore Listener');
-        this.unsubscribeFn = this.ref.onSnapshot({
+        if(auth().currentUser == null) return;
+
+        this.unsubscribeFn = this.ref
+            .where('userID', '==', auth().currentUser.uid)
+            .onSnapshot({
             next: (snapshot => {
                 const result: T[] = snapshot.docs.map(doc => this.parseDoc(doc));
                 this.emitEvent(result);
@@ -37,6 +42,7 @@ export abstract class FirestoreEventManager<T> extends ApiEventManager<T[]> {
         if(this.listenerCount() == 0)
             this.startFirestoreListener();
 
+
         return super.addEventListener(listener);
     }
 
@@ -48,4 +54,11 @@ export abstract class FirestoreEventManager<T> extends ApiEventManager<T[]> {
     }
 
     public start() { } //does nothing when called, not needed
+
+    public restart() {
+        if(this.listenerCount() === 0) return;
+
+        this.stopFirestoreListener();
+        this.startFirestoreListener();
+    }
 }

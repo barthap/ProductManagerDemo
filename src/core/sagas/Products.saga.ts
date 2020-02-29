@@ -96,6 +96,7 @@ function* startApiEventListener() {
         console.log('Creating saga event channel...');
         const listener: ProductCollectionListener = {
             onEvent: (event) => {
+                console.log('Event channel', event);
                 emitter({ data: event || [] });
             }
         };

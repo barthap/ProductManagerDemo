@@ -19,8 +19,8 @@ export function ProfileScreen() {
                     <Title>{i18n.t('title.profile')}</Title>
                 </Body>
                 <Right>
-                    <Icon name="delete"
-                          type="MaterialIcons"
+                    <Icon name="account-edit"
+                          type="MaterialCommunityIcons"
                           onPress={() => alert('xD')}/>
                 </Right>
             </Header>
