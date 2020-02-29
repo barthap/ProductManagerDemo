@@ -1,4 +1,8 @@
 # Product Manager Demo
+
+> **NOTE:** This Branch is Work-in-Progress, and Readme may be inconsistent.
+>See README.md in Master branch for official info. 
+
 Yet another React Native CRUD app, written in
 TypeScript for demo purposes. Features:
 - View product list
