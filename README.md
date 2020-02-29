@@ -6,11 +6,22 @@ TypeScript for demo purposes. Features:
 - Add, edit and delete products
 - Language/i18n support
 - Google (Firebase) Analytics integration
+- _User accounts (Firebase auth). Sign in and Sign up support
+(see note below)_ 
+- _Display to users their own products (see note below)_
+
+>There is also a Work-in-Progress
+>[**users** repository branch](https://github.com/barthap/ProductManagerDemo/tree/users)
+>which has support for user accounts, signup and signin
+>using Firebase Auth.
+>Link: https://github.com/barthap/ProductManagerDemo/tree/users
 
 See also [Technical Features](#technical-features)
 
 Written to recall React Native after years, learn hooks
 and Firebase integration.
+
+![Screenshot](./Screenshots/scr.png)
 
 ## Requirements
 * React Native CLI
