@@ -1,4 +1,7 @@
 # Product Manager Demo
+
+> This repository uses the outdated approach with mixed Managed- and Bare Expo workflows. If you want to take inspiration from this repository, please read [this page](https://link.medium.com/oavehS7GShb) first. This repository is going to be updated soon.
+
 Yet another React Native CRUD app, written in
 TypeScript for demo purposes. Features:
 - View product list
