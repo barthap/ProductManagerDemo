@@ -8,6 +8,7 @@ import { ProductForm } from "../components/ProductForm";
 import { StyleSheet } from "react-native";
 import { Nav, NavType, RootStackParamList } from "../navigation/routeNames";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Product } from "../api/ProductApi";
 
 type AddProductStackNavProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -21,7 +22,7 @@ type Props = {
 
 export function AddProductScreen(props: Props) {
   const dispatch = useDispatch();
-  const handleSubmit = (product) => {
+  const handleSubmit = (product: Product) => {
     dispatch(productsActions.addProduct(product));
     props.navigation.goBack();
   };

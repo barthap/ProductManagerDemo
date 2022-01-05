@@ -9,6 +9,7 @@ import { Nav, RootStackParamList } from "../navigation/routeNames";
 import analytics from "@react-native-firebase/analytics";
 import { AppOwnership } from "expo-constants";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Product } from "../api/ProductApi";
 
 type AddProductStackNavProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -23,7 +24,7 @@ type Props = {
 
 export function EditProductScreen(props: Props) {
   const dispatch = useDispatch();
-  const handleSubmit = (product) => {
+  const handleSubmit = (product: Product) => {
     analytics().logEvent("product_edit", {
       product_id: product.id,
       product_name: product.name,
