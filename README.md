@@ -25,6 +25,8 @@ Written to show:
 
 # Readme below is outdated. It is to be updated soon
 
+![Screenshot](./Screenshots/scr.png)
+
 ## Requirements
 
 - Expo CLI 5.x or newer
