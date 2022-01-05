@@ -1,20 +1,17 @@
-import React from "react";
-import { View, Text, Button, StyleSheet, Alert } from "react-native";
-import { RouteProp } from "@react-navigation/native";
-import { Container, Content, H1, H3, Icon } from "native-base";
-import { useDispatch } from "react-redux";
-import { productsActions } from "../core/actions/Products.actions";
-import { MessageBox } from "../components/MessageBox";
-import { Nav, RootStackParamList } from "../navigation/routeNames";
-import i18n from "../i18n";
-import analytics from "@react-native-firebase/analytics";
-import { AppOwnership } from "expo-constants";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import React, { useCallback } from 'react';
+import { View, Text, Button, StyleSheet, Alert } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { Container, Content, H1, H3, Icon } from 'native-base';
+import { useDispatch } from 'react-redux';
+import { productsActions } from '../core/actions/Products.actions';
+import { MessageBox } from '../components/MessageBox';
+import { Nav, RootStackParamList } from '../navigation/routeNames';
+import i18n from '../i18n';
+import analytics from '@react-native-firebase/analytics';
+import { AppOwnership } from 'expo-constants';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type DetailsStackNavProp = NativeStackNavigationProp<
-  RootStackParamList,
-  typeof Nav.Details
->;
+type DetailsStackNavProp = NativeStackNavigationProp<RootStackParamList, typeof Nav.Details>;
 type DetailsScreenRouteProp = RouteProp<RootStackParamList, typeof Nav.Details>;
 
 type Props = {
@@ -26,31 +23,31 @@ export function DetailsScreen(props: Props) {
   const product = props.route.params.product;
 
   const dispatch = useDispatch();
-  const handleDeleteBtnClick = () => {
+  const handleDeleteBtnClick = useCallback(() => {
     Alert.alert(
-      i18n.t("modals.deletion.title"),
-      i18n.t("modals.deletion.message", { name: product.name }),
+      i18n.t('modals.deletion.title'),
+      i18n.t('modals.deletion.message', { name: product.name }),
       [
         {
-          text: i18n.t("modals.deletion.btn_no"),
-          onPress: () => console.log("Cancelled deletion"),
-          style: "cancel",
+          text: i18n.t('modals.deletion.btn_no'),
+          onPress: () => console.log('Cancelled deletion'),
+          style: 'cancel',
         },
         {
-          text: i18n.t("modals.deletion.btn_yes"),
+          text: i18n.t('modals.deletion.btn_yes'),
           onPress: () => {
             dispatch(productsActions.deleteProduct(product.id));
-            analytics().logEvent("product_delete", {
+            analytics().logEvent('product_delete', {
               product_id: product.id,
               product_name: product.name,
             });
             props.navigation.goBack();
           },
-          style: "destructive",
+          style: 'destructive',
         },
       ]
     );
-  };
+  }, [product, dispatch, props.navigation]);
 
   props.navigation.setOptions({
     headerRight: ({ tintColor }) => (
@@ -73,21 +70,19 @@ export function DetailsScreen(props: Props) {
     ),
   });
 
-  let quantityInfo = "N/A";
+  let quantityInfo = 'N/A';
   if (product.quantity != null && product.quantityUnit != null)
-    quantityInfo = [product.quantity, product.quantityUnit].join(" ");
+    quantityInfo = [product.quantity, product.quantityUnit].join(' ');
 
   return (
     <Container>
       <Content style={styles.text}>
-        <H1 style={styles.text}>
-          {i18n.t("details.header", { name: product.name })}
-        </H1>
+        <H1 style={styles.text}>{i18n.t('details.header', { name: product.name })}</H1>
         <H3 style={styles.text}>
-          {i18n.t("details.quantity")} {quantityInfo}
+          {i18n.t('details.quantity')} {quantityInfo}
         </H3>
         <Text style={styles.text}>
-          {i18n.t("details.description")} {product.description || "N/A"}
+          {i18n.t('details.description')} {product.description || 'N/A'}
         </Text>
       </Content>
       <MessageBox />
@@ -97,8 +92,8 @@ export function DetailsScreen(props: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
     padding: 10,
@@ -107,8 +102,8 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   iconContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
     width: 100,
   },
 });

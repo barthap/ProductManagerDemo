@@ -2,6 +2,8 @@
 
 This repository is a demo app based on my **[article on Expo + React Native Firebase integration](https://bartlomiej-klocek.medium.com/how-to-integrate-react-native-firebase-into-expo-d34712eaf64d)** - it uses Expo Development Client and Config Plugins to integrate native Firebase into Expo app. Read the article for more details.
 
+> This repo was recently updated from Expo SDK 36 to 44, after two years. There's still lots of old code, which may not follow current best practices.
+
 Yet another React Native CRUD app, written in
 TypeScript for demo purposes. Features:
 
@@ -23,9 +25,7 @@ Written to show:
 
 ![Screenshot](./Screenshots/scr.png)
 
-# Readme below is outdated. It is to be updated soon
-
-![Screenshot](./Screenshots/scr.png)
+# Readme below might be outdated. It is to be updated soon
 
 ## Requirements
 
@@ -38,23 +38,22 @@ Written to show:
 
 1. Clone Repo
 2. `yarn install`
-3. Mac/iOS only: `cd ios && pod install && cd ..`
-4. To use Firestore database, download Google Services config files
+3. Create a Firebase project and download Google Services config files
    - Put `google-services.json` in the root directory
      See docs [here](https://invertase.io/oss/react-native-firebase/quick-start/android-firebase-credentials)
      for Android
    - Put `GoogleService-Info.plist` in the root directory.
      See docs [here](https://invertase.io/oss/react-native-firebase/quick-start/ios-firebase-credentials)
      for iOS
+4. Run `yarn android` or `yarn ios`. It will build the Expo project, run the bundler and start the app in simulator.
 
 ## Running
 
 `package.json` contains a few run scripts:
 
-- `start` - Runs just Metro bundler
-- `android` - Builds Android project and runs it (Requires Android SDK)
-- `ios` - Builds iOS project and runs it (Requires Xcode)
-- `expo` - Runs expo daemon - possible to open app in Expo Client
+- `start` - Runs just Metro bundler for Expo Dev Client (`expo start --dev-client`)
+- `android` - Builds Android project and runs it (Requires Android SDK) (`expo run:android`)
+- `ios` - Builds iOS project and runs it (Requires Xcode) (`expo run:ios`)
 
 #### Switching API
 
@@ -71,7 +70,7 @@ comment out the first line, and uncomment the second one.
 ## Used libraries and frameworks
 
 - React Native
-- Expo - uses bare workflow
+- Expo -
 - React Navigation
 - Native-base - for UI components
 - Redux
@@ -87,16 +86,7 @@ comment out the first line, and uncomment the second one.
   and simple in-memory dictionary based API for demo purposes. Interfaces
   needed to create custom implementation are provided.
 - Support for event-driven APIs (for example Firestore `onSnapshot()`)
-- Expo Client doesn't support native modules, React-Native-Firebase
-  cannot be used there. [See details](https://docs.expo.io/versions/v36.0.0/guides/using-firebase/).
-  App provides auto fallback Firebase JS SDK and loads it instead of RNFirebase
-  when using Expo Client.
-  > Note: React-Native-Firebase and Firestore JS SDK provide identical API,
-  > so there's no need to split database implementation.
-
-> Only Firestore module is supported on Expo, because it's necessary
-> for app to work.
-> Analytics and other Firebase modules are working only on native builds
+- Expo Dev Client + prebuilding / config plugins - uses React Native Firebase with Expo
 
 ## File structure
 
@@ -108,7 +98,6 @@ comment out the first line, and uncomment the second one.
 - `src/App.tsx` - Main App component
 - `src/api` - Product API interfaces and implementations
   - `Firestore` - Firestore API implementation
-    - `firestoreProvider.ts` - provide basic RNFB configuration
   - `Fake` - FakeApi - simple dictionary based in-memory API impl.
 - `src/components` - React components
 - `src/core` - Redux implementation files
@@ -128,5 +117,3 @@ comment out the first line, and uncomment the second one.
 
 - ~~Information message boxes is spamming too much about state~~
   but I think it's OK for demo purposes
-- Unit tests
-  > As there are only few tests, some features might not work as expected!
