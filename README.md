@@ -38,14 +38,15 @@ For details on the Expo stuff, refer to their docs: [Dev Clients/Builds](https:/
 
 1. Clone Repo
 2. `yarn install`
-3. Create a Firebase project and download Google Services config files
+3. Set the `ios.bundleIdentifier` and `android.package` to your custom values, you'll need them in the next step.
+4. Create a Firebase project and download Google Services config files
    - Put `google-services.json` in the root directory
      See docs [here](https://invertase.io/oss/react-native-firebase/quick-start/android-firebase-credentials)
      for Android
    - Put `GoogleService-Info.plist` in the root directory.
      See docs [here](https://invertase.io/oss/react-native-firebase/quick-start/ios-firebase-credentials)
      for iOS
-4. Run `yarn android` or `yarn ios`. It will build the Expo project, run the bundler and start the app in simulator.
+5. Run `yarn android` or `yarn ios`. It will build the Expo project, run the bundler and start the app in simulator.
 
 ### Running
 

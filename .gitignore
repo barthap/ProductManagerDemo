@@ -6,7 +6,7 @@ GoogleService-Info.plist
 android
 ios
 
-.expo
+.expo/
 
 # OSX
 #
