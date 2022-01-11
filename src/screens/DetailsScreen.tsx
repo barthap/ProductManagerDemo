@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, Text, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { Container, Content, H1, H3, Icon } from 'native-base';
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,6 @@ import { MessageBox } from '../components/MessageBox';
 import { Nav, RootStackParamList } from '../navigation/routeNames';
 import i18n from '../i18n';
 import analytics from '@react-native-firebase/analytics';
-import { AppOwnership } from 'expo-constants';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type DetailsStackNavProp = NativeStackNavigationProp<RootStackParamList, typeof Nav.Details>;

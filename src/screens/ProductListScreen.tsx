@@ -1,17 +1,16 @@
-import "react-native-gesture-handler";
-import React, { useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { ProductList } from "../components/ProductList";
-import { Product } from "../api/ProductApi";
-import { useProducts } from "../hooks/useProducts";
-import { Container, Icon } from "native-base";
-import { MessageBox } from "../components/MessageBox";
-import { Nav, RootStackParamList } from "../navigation/routeNames";
-import i18n from "../i18n";
-import analytics from "@react-native-firebase/analytics";
-import Constants from "expo-constants";
-import { useComponentLifecycleLog } from "../hooks/useComponentLifecycleLog";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import 'react-native-gesture-handler';
+import React, { useEffect } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import { ProductList } from '../components/ProductList';
+import { Product } from '../api/ProductApi';
+import { useProducts } from '../hooks/useProducts';
+import { Container, Icon } from 'native-base';
+import { MessageBox } from '../components/MessageBox';
+import { Nav, RootStackParamList } from '../navigation/routeNames';
+import i18n from '../i18n';
+import analytics from '@react-native-firebase/analytics';
+import { useComponentLifecycleLog } from '../hooks/useComponentLifecycleLog';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type ProductListStackNavProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -24,7 +23,7 @@ type Props = {
 function NoItemsMessage(props: { handleRefresh: () => void }) {
   return (
     <View style={styles.messageContainer}>
-      <Text style={styles.messageText}>{i18n.t("list.empty")}</Text>
+      <Text style={styles.messageText}>{i18n.t('list.empty')}</Text>
       <Icon
         name="ios-refresh"
         onPress={props.handleRefresh}
@@ -36,7 +35,7 @@ function NoItemsMessage(props: { handleRefresh: () => void }) {
   );
 }
 export function ProductListScreen(props: Props) {
-  useComponentLifecycleLog("Product Lists");
+  useComponentLifecycleLog('Product Lists');
   //custom hook that loads product list
   const [data, reload] = useProducts(true);
 
@@ -46,7 +45,7 @@ export function ProductListScreen(props: Props) {
         {
           item_id: product.id,
           item_name: product.name,
-          item_category: "N/A",
+          item_category: 'N/A',
         },
       ],
     });
@@ -85,8 +84,8 @@ const styles = StyleSheet.create({
   },
   messageContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   messageText: {
     fontSize: 15,
@@ -97,6 +96,6 @@ const styles = StyleSheet.create({
   },
   secondaryText: {
     fontSize: 12,
-    color: "#555",
+    color: '#555',
   },
 });

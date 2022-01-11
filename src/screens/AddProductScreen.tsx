@@ -1,23 +1,20 @@
-import React from "react";
-import { RouteProp } from "@react-navigation/native";
-import { useProducts } from "../hooks/useProducts";
-import { Text, Container, Content } from "native-base";
-import { useDispatch } from "react-redux";
-import { productsActions } from "../core/actions/Products.actions";
-import { ProductForm } from "../components/ProductForm";
-import { StyleSheet } from "react-native";
-import { Nav, NavType, RootStackParamList } from "../navigation/routeNames";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Product } from "../api/ProductApi";
+import React from 'react';
+import { RouteProp } from '@react-navigation/native';
+import { Container, Content } from 'native-base';
+import { useDispatch } from 'react-redux';
+import { productsActions } from '../core/actions/Products.actions';
+import { ProductForm } from '../components/ProductForm';
+import { StyleSheet } from 'react-native';
+import { Nav, RootStackParamList } from '../navigation/routeNames';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Product } from '../api/ProductApi';
 
-type AddProductStackNavProp = NativeStackNavigationProp<
-  RootStackParamList,
-  typeof Nav.Add
->;
+type AddProductStackNavProp = NativeStackNavigationProp<RootStackParamList, typeof Nav.Add>;
 type AddProductScreenRouteProp = RouteProp<RootStackParamList, typeof Nav.Add>;
 
 type Props = {
   navigation: AddProductStackNavProp;
+  route: AddProductScreenRouteProp;
 };
 
 export function AddProductScreen(props: Props) {

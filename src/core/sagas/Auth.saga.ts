@@ -1,6 +1,7 @@
 import { eventChannel } from 'redux-saga';
 import { take, takeEvery, all, put } from 'redux-saga/effects';
 import auth from '@react-native-firebase/auth';
+import analytics from '@react-native-firebase/analytics';
 import { authConstants } from '../constants/Auth.constants';
 import { authActions, LoginAction, RegisterAction } from '../actions/Auth.actions';
 import { ProductEventManager } from '../../api';
@@ -10,6 +11,9 @@ function* watchLogin() {
     try {
       const { email, password } = action.payload;
       yield auth().signInWithEmailAndPassword(email, password);
+      yield analytics().logLogin({
+        method: 'email',
+      });
     } catch (e: any) {
       switch (e.code) {
         case 'auth/invalid-email':
@@ -45,6 +49,9 @@ function* watchRegister() {
       yield auth().createUserWithEmailAndPassword(email, password);
       yield auth().currentUser!!.updateProfile({ displayName: name });
       yield put(authActions.updateUser(auth().currentUser!!));
+      yield analytics().logSignUp({
+        method: 'email',
+      });
     } catch (e: any) {
       switch (e.code) {
         case 'auth/email-already-in-use':
