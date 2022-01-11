@@ -57,7 +57,7 @@ For details on the Expo stuff, refer to their docs: [Dev Clients/Builds](https:/
 
 #### Switching API
 
-By default, an in-memory Fake API is selected. To enable Firestore,
+By default, the Firestore API is selected. To use the in-memory Fake API,
 open `src/api/index.ts` and then
 
 ```typescript
@@ -65,7 +65,7 @@ const Api = new FakeApi();
 //const Api = new FirestoreProductsApi();
 ```
 
-comment out the first line, and uncomment the second one.
+uncomment the first line, and comment out the second one, as shown above.
 
 ## Used libraries and frameworks
 

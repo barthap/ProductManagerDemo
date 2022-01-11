@@ -4,7 +4,7 @@ import { ProductListScreen } from '../screens/ProductListScreen';
 import { StyleSheet } from 'react-native';
 import { DetailsScreen } from '../screens/DetailsScreen';
 import React from 'react';
-import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { AboutScreen } from '../screens/AboutScreen';
 import { IosIcon } from '../utils/icons';
 import { AddProductScreen } from '../screens/AddProductScreen';
@@ -12,7 +12,6 @@ import { Icon } from 'native-base';
 import { EditProductScreen } from '../screens/EditProductScreen';
 import { Nav, RootStackParamList } from './routeNames';
 import analytics from '@react-native-firebase/analytics';
-import { NavigationState, PartialState } from '@react-navigation/routers';
 import i18n from '../i18n';
 import { typedUseSelector } from '../hooks/typedUseSelector';
 import { LoginScreen } from '../screens/LoginScreen';
@@ -104,39 +103,35 @@ function NavigationAuth() {
 
 export function AppNavigation() {
   const routeNameRef = React.useRef<string>();
-  const navigationRef = React.useRef<any>();
+  const navigationRef = useNavigationContainerRef();
 
-  const handleStateChange = (state?: NavigationState) => {
+  const handleStateChange = async () => {
     const previousRouteName = routeNameRef.current;
-    const currentRouteName = getActiveRouteName(state);
+    const currentRouteName = navigationRef.getCurrentRoute()?.name || 'Unknown';
 
-    analytics().logScreenView({
-      screen_name: currentRouteName,
-      previous_screen_name: previousRouteName,
-    });
+    if (previousRouteName !== currentRouteName) {
+      await analytics().logScreenView({
+        screen_name: currentRouteName,
+        screen_class: currentRouteName,
+        previous_screen_name: previousRouteName,
+      });
+    }
 
     // Save the current route name for later comparision
     routeNameRef.current = currentRouteName;
   };
 
+  const onReady = React.useCallback(() => {
+    routeNameRef.current = navigationRef.getCurrentRoute()?.name || 'Unknown';
+  }, [navigationRef]);
+
   const authState = typedUseSelector((state) => state.auth);
 
   return (
-    <NavigationContainer ref={navigationRef} onStateChange={handleStateChange}>
+    <NavigationContainer ref={navigationRef} onReady={onReady} onStateChange={handleStateChange}>
       {authState.isLoggedIn ? <NavigationMain /> : <NavigationAuth />}
     </NavigationContainer>
   );
-}
-
-// Gets the current screen from navigation state
-function getActiveRouteName(state?: NavigationState | PartialState<NavigationState>): string {
-  const route = state?.index ? state.routes[state.index] : undefined;
-
-  if (route?.state)
-    // Dive into nested navigators
-    return getActiveRouteName(route.state);
-
-  return route?.name ?? 'N/A';
 }
 
 //icons available: https://expo.github.io/vector-icons/

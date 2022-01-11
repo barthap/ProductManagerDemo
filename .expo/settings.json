@@ -6,5 +6,5 @@
   "minify": false,
   "urlRandomness": null,
   "https": false,
-  "scheme": "exp+product-manager-demo"
+  "scheme": "com.barthap10.product-manager-demo"
 }
