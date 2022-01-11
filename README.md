@@ -2,7 +2,7 @@
 
 This repository is a demo app based on my **[article on Expo + React Native Firebase integration](https://bartlomiej-klocek.medium.com/how-to-integrate-react-native-firebase-into-expo-d34712eaf64d)** - it uses Expo Development Client and Config Plugins to integrate native Firebase into Expo app. Read the article for more details.
 
-> This repo was recently updated from Expo SDK 36 to 44, after two years. There's still lots of old code, which may not follow current best practices.
+> This repo was recently updated from Expo SDK 36 to 44, after two years. There's still lots of old code, which may not follow current best practices. **This README might not be fully up-to-date too**.
 
 Yet another React Native CRUD app, written in
 TypeScript for demo purposes. Features:
@@ -20,12 +20,12 @@ See also [Technical Features](#technical-features)
 Written to show:
 
 - Expo Dev Client and config plugins
-- Integration with React Native Firebase
+- Expo and React Native Firebase integration
 - Learn how to CRUD in React Native
 
-![Screenshot](./Screenshots/scr.png)
+For details on the Expo stuff, refer to their docs: [Dev Clients/Builds](https://docs.expo.dev/development/introduction/), [Config Plugins](https://docs.expo.dev/guides/config-plugins/), [React Native Firebase](https://rnfirebase.io/#expo).
 
-# Readme below might be outdated. It is to be updated soon
+![Screenshot](./Screenshots/scr.png)
 
 ## Requirements
 
@@ -47,7 +47,7 @@ Written to show:
      for iOS
 4. Run `yarn android` or `yarn ios`. It will build the Expo project, run the bundler and start the app in simulator.
 
-## Running
+### Running
 
 `package.json` contains a few run scripts:
 
@@ -70,14 +70,13 @@ comment out the first line, and uncomment the second one.
 ## Used libraries and frameworks
 
 - React Native
-- Expo -
+- Expo SDK 44 - semi-managed worflow - uses prebuild and config plugins
 - React Navigation
 - Native-base - for UI components
 - Redux
 - Redux Saga
 - Firestore database
-- React Native Firebase (Firestore, Analytics) - for native builds
-- Firebase JS SDK - for Expo client
+- React Native Firebase (Firestore, Analytics, Auth) - for native builds
 - i18n-js for language support
 
 ## Technical features
