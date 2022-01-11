@@ -1,9 +1,10 @@
 {
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 28832,
-  "expoServerNgrokUrl": "https://gs-ghi.anonymous.productmanagerdemo.exp.direct",
-  "packagerNgrokUrl": "https://packager.gs-ghi.anonymous.productmanagerdemo.exp.direct",
-  "ngrokPid": 28849
+  "expoServerPort": 8081,
+  "packagerPort": 8081,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null,
+  "devToolsPort": 19002
 }

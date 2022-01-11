@@ -1,8 +1,10 @@
 {
   "hostType": "lan",
   "lanType": "ip",
+  "devClient": true,
   "dev": true,
   "minify": false,
-  "urlRandomness": "gs-ghi",
-  "https": false
+  "urlRandomness": null,
+  "https": false,
+  "scheme": "exp+product-manager-demo"
 }

@@ -3,11 +3,13 @@
     "add": "Add Product",
     "edit": "Edit %{name}",
     "list": "Product List",
-    "about": "About app"
+    "about": "About app",
+    "profile": "My Profile"
   },
   "menu": {
     "products": "Products",
-    "about": "About"
+    "about": "About",
+    "profile": "Profile"
   },
   "form": {
     "fields": {
@@ -45,6 +47,10 @@
     "btn_text": "Tap me",
     "example_msg": "This is just a simple message box used for testing purposes"
   },
+  "profile": {
+    "logout": "Logout"
+  },
+
   "list": {
     "empty": "Product list is empty. Add one!"
   },

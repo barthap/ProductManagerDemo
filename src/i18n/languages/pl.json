@@ -3,11 +3,13 @@
     "add": "Dodaj produkt",
     "edit": "Edytuj %{name}",
     "list": "Lista produktów",
-    "about": "O programie"
+    "about": "O programie",
+    "profile": "Mój profil"
   },
   "menu": {
     "products": "Produkty",
-    "about": "Informacje"
+    "about": "Informacje",
+    "profile": "Profil"
   },
   "form": {
     "fields": {
@@ -44,6 +46,9 @@
     "github": "Zobacz na GitHubie",
     "btn_text": "Kliknij mnie",
     "example_msg": "To przykładowa wiadomość używana do testów"
+  },
+  "profile": {
+    "logout": "Wyloguj się"
   },
   "list": {
     "empty": "Lista produktów jest pusta. Dodaj jakiś!"

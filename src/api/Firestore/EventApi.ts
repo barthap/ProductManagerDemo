@@ -1,5 +1,6 @@
-import {ApiEventListener, ApiEventManager} from "../EventApi";
-import firestore, {FirebaseFirestoreTypes} from "./firestoreProvider";
+import { ApiEventListener, ApiEventManager } from '../EventApi';
+import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 export type QueryDocSnapshot = FirebaseFirestoreTypes.QueryDocumentSnapshot;
 
@@ -7,45 +8,51 @@ export type QueryDocSnapshot = FirebaseFirestoreTypes.QueryDocumentSnapshot;
 //when first listener appears. And unsubscribe, when
 //last listener is removed
 export abstract class FirestoreEventManager<T> extends ApiEventManager<T[]> {
-    private ref: FirebaseFirestoreTypes.CollectionReference;
-    private unsubscribeFn?: () => void;
+  private ref: FirebaseFirestoreTypes.CollectionReference;
+  private unsubscribeFn?: () => void;
 
-    protected abstract parseDoc(doc: QueryDocSnapshot): T;
+  protected abstract parseDoc(doc: QueryDocSnapshot): T;
 
-    protected constructor(collection: string) {
-        super();
-        this.ref = firestore().collection(collection);
-    }
+  protected constructor(collection: string) {
+    super();
+    this.ref = firestore().collection(collection);
+  }
 
-    private startFirestoreListener() {
-        console.log('Starting Firestore Listener');
-        this.unsubscribeFn = this.ref.onSnapshot({
-            next: (snapshot => {
-                const result: T[] = snapshot.docs.map(doc => this.parseDoc(doc));
-                this.emitEvent(result);
-            })
-        })
-    }
+  private startFirestoreListener() {
+    console.log('Starting Firestore Listener');
+    if (auth().currentUser == null) return;
 
-    private stopFirestoreListener() {
-        console.log('Stopping Firestore Listener');
-        if(this.unsubscribeFn != null)
-            this.unsubscribeFn();
-    }
+    this.unsubscribeFn = this.ref.where('userID', '==', auth().currentUser?.uid).onSnapshot({
+      next: (snapshot) => {
+        const result: T[] = snapshot.docs.map((doc) => this.parseDoc(doc));
+        this.emitEvent(result);
+      },
+    });
+  }
 
-    addEventListener(listener: ApiEventListener<T[]>): number {
-        if(this.listenerCount() == 0)
-            this.startFirestoreListener();
+  private stopFirestoreListener() {
+    console.log('Stopping Firestore Listener');
+    if (this.unsubscribeFn != null) this.unsubscribeFn();
+  }
 
-        return super.addEventListener(listener);
-    }
+  addEventListener(listener: ApiEventListener<T[]>): number {
+    if (this.listenerCount() == 0) this.startFirestoreListener();
 
-    removeEventListener(listenerId: number) {
-        super.removeEventListener(listenerId);
+    return super.addEventListener(listener);
+  }
 
-        if(this.listenerCount() == 0)
-            this.stopFirestoreListener();
-    }
+  removeEventListener(listenerId: number) {
+    super.removeEventListener(listenerId);
 
-    public start() { } //does nothing when called, not needed
+    if (this.listenerCount() == 0) this.stopFirestoreListener();
+  }
+
+  public start() {} //does nothing when called, not needed
+
+  public restart() {
+    if (this.listenerCount() === 0) return;
+
+    this.stopFirestoreListener();
+    this.startFirestoreListener();
+  }
 }

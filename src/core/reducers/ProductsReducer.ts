@@ -1,6 +1,6 @@
 import {Product} from "../../api/ProductApi";
 import {Reducer} from "redux";
-import {productConstants} from "../constants/products.constants";
+import {productConstants} from "../constants/Products.constants";
 
 export interface IProductsState {
     products: Product[];
